@@ -1,3 +1,7 @@
+#top {
+    background-color: #d1e0e0;
+}
+
 .col-12 #title {
     margin-top: 30px;
     border-bottom: solid black 1px;
@@ -5,13 +9,29 @@
     text-align: center;
 }
 
+#nav {
+    background-color: #85adad;
+}
+
 #buttons-view {
     padding: 5px;
 }
 
 .topic {
-    padding: 15px;
+    padding: 10px;
+    margin: 5px;
+}
+
+#search {
     margin: 10px;
+    margin-top: 10px;
+    margin-left: 150px;
+    float: left;
+}
+
+#add-topic {
+    padding: 10px;
+    margin: 5px;
 }
 
 .gifImage {
