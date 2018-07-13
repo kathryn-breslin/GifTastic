@@ -51,7 +51,9 @@ function displayButtons () {
                 gifImage.append(gifReplaceImage);
                 // }
             })
-                
+// Make this into an if/else statement
+//If the user clicks a static image, replace with the gif
+//If the user clicks on the gif, replace with the static image
             });
 
 //ABOVE: change image to animated gif on click -- not working
