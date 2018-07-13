@@ -20,11 +20,7 @@ function displayButtons () {
             method: "GET",
            
         }).then(function(response) {
-            console.log(queryURL);
             console.log(response);
-
-            //$('#gifImage').html('<img src="' + response.images + '">');
-            $('#gif-rating').html('<h4>' + response.rating + '</h4>');
 
             $('.topic').on('click', function() {
 
@@ -36,21 +32,15 @@ function displayButtons () {
                     var p = $('<p>').text('Rating: ' + topic[i].rating);
                     var gifImage = $('<img>');
                     gifImage.attr('src', topic[i].images.fixed_height.url);
-                    gifDiv.append(p);
+                    gifDiv.addClass('gifImage');
                     gifDiv.append(gifImage);
+                    gifDiv.append(p);
             
                     $('#gif-view').prepend(gifDiv);
                 }
             });
 //each button needs to be double clicked in order for the collection of gifs to appear
     });
-
-
-//check on how to call the api appropriately
- //this is incorrect
-    //code goes here to populate page on click?
-
-    //create function within this function that acts on click to populate the page
 }
 
 function createButtons() {

@@ -1,0 +1,28 @@
+.col-12 #title {
+    margin-top: 30px;
+    border-bottom: solid black 1px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+#buttons-view {
+    padding: 5px;
+}
+
+.topic {
+    padding: 15px;
+    margin: 10px;
+}
+
+.gifImage {
+    float: left;
+    display: inline;
+    margin: 10px;
+    border: solid black 1px;
+    padding: 10px;
+}
+.gifImage p {
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    margin-top: 10px;
+}
