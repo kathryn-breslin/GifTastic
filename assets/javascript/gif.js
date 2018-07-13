@@ -41,15 +41,20 @@ function displayButtons () {
                     $('#gif-view').prepend(gifDiv);
 
                 }
-//each button needs to be double clicked in order for the collection of gifs to appear
+//ABOVE: each button needs to be double clicked in order for the collection of gifs to appear
+
             $('.gifImage').on('click', function() {
-                var gifReplaceImage = gifImage.attr('src', topic[i].images.fixed_height.url);
+                // topic = response.data;
+                // for (var i = 0; i < topic.length; i++) {
+                var gifReplaceImage = $('<img>');
+                gifReplaceImage.attr('src', topic[i].images.fixed_height.url);
                 gifImage.append(gifReplaceImage);
+                // }
             })
                 
             });
 
-//change image to animated gif on click -- not working
+//ABOVE: change image to animated gif on click -- not working
     });
 }
 
