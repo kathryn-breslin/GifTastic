@@ -5,7 +5,7 @@ var topics = ["plants", "books", "San Francisco",
 function displayButtons () {
    
         var topic = $(this).attr('data-name');
-    
+        
         //my GIPHY key would not work..the one used below is from our activities
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         topic + "&api_key=dc6zaTOxFJmzC&limit=10&rating=PG"
@@ -28,11 +28,18 @@ function displayButtons () {
                 
                 topic = response.data;
                 for (var i = 0; i < topic.length; i++) {
-                    var gifDiv = $('<div>');
+                    var gifDiv = $('<div/>');
                     var rating = $('<p>').text('Rating: ' + topic[i].rating);
                     var title = $('<p>').text('Title: ' + topic[i].title);
-                    var gifImage = $('<img>');
+                    var gifImage = $('<img/>');
+
+                    gifImage.attr('data-state', 'still');
                     gifImage.attr('src', topic[i].images.fixed_height_still.url);
+                    gifImage.attr('data-still', topic[i].images.fixed_height_still.url);
+
+                    gifImage.attr('data-state', 'animate');
+                    gifImage.attr('data-animate', topic[i].images.fixed_height.url);
+                   // gifImage.attr('src', topic[i].images.fixed_height.url);
                     gifDiv.addClass('gifImage');
                     gifDiv.append(gifImage);
                     gifDiv.append(rating);
@@ -40,26 +47,28 @@ function displayButtons () {
             
                     $('#gif-view').prepend(gifDiv);
 
+
+                    $('#gif-view').on('click', '.gifImage', function() {
+
+                        var state = $(this).attr('data-state');
+            
+                         if (state === 'still'){
+                         var animatedGif = $(this).attr('data-animate');
+                         $(this).attr('data-state', 'animate');
+                         $(this).attr('src', animatedGif);
+                          }
+            
+                         else   {
+                         var stillGif = $(this).attr('data-still');
+                         $(this).attr('data-state', 'still');
+                         $(this).attr('src', stillGif);
+                         }
+                     }); 
                 }
-//ABOVE: each button needs to be double clicked in order for the collection of gifs to appear
+         });
 
-            $('.gifImage').on('click', function() {
-                // topic = response.data;
-                // for (var i = 0; i < topic.length; i++) {
-                var gifReplaceImage = $('<img>');
-                gifReplaceImage.attr('src', topic[i].images.fixed_height.url);
-                gifImage.append(gifReplaceImage);
-                // }
-            })
-// Make this into an if/else statement
-//If the user clicks a static image, replace with the gif
-//If the user clicks on the gif, replace with the static image
-            });
-
-//ABOVE: change image to animated gif on click -- not working
     });
 }
-
 function createButtons() {
     $('#buttons-view').empty();
 
@@ -84,3 +93,5 @@ function createButtons() {
 $(document).on('click', '.topic', displayButtons);
 
 createButtons();
+
+
