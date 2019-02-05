@@ -47,9 +47,15 @@ function displayButtons () {
             
                     $('#gif-view').prepend(gifDiv);
 
+                    $('#gifReturn').css(
+                    {
+                        "background-color": "#F8F9FA",
+                        "padding": "20px",
+                        "margin": "40px"
+                    });
+
 
                     $('#gif-view').on('click', '.gifImage', function() {
-
                         var state = $(this).attr('data-state');
             
                          if (state === 'still'){
