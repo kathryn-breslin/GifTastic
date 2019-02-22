@@ -15,29 +15,26 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <div id="buttons-view"></div>
+        <form class="form-inline" id="search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+            <button id="add-topic" type="submit" value="Add a Topic" class="btn btn-light"><i class="ion-ios-plus-outline"></i>
+                Add a Topic </button>
+        </form>
+    </nav>
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4" id="title">GifTastic Gif Search</h1>
-            <!-- <p class="lead">Double click any button to see 10 unique gifs! If you want to find a different gif, enter
-                the topic into the search bar and click the newly created button.</p> -->
+            <p class="lead">The Best Place to Find Unique GIFs.</p>
         </div>
     </div>
 
     <div class="container-fluid" id="container">
-        <nav class="navbar navbar-light bg-light">
-            <div id="buttons-view"></div>
-            <form class="form-inline" id="search">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
-                <button id="add-topic" type="submit" value="Add a Topic" class="btn btn-light"><i class="ion-ios-plus-outline"></i>
-                    Add a Topic </button>
-            </form>
-        </nav>
-        <div class="row" id="gifReturn">
-            <div class="col-12">
-                <div id="gif-view"></div>
-                <div id="gif-rating"></div>
-            </div>
+        <div class="col-12" id="gifReturn">
+            <div id="gif-view"></div>
+            <div id="gif-rating"></div>
         </div>
     </div>
     </div>

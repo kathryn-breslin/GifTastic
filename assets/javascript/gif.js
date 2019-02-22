@@ -58,7 +58,7 @@ function findGifs() {
 
             newDivContentsPara = $('<p>')
             newDivContentsPara.addClass('card-text');
-            newDivContentsPara.append("<p>Title: " + topic[i].title + "</p>");
+            newDivContentsPara.append("<p>" + topic[i].title + "</p>");
             newDivContentsPara.append("<p>Rating: " + topic[i].rating + "</p>");
 
             newDiv.append(newGifImage);
@@ -66,26 +66,18 @@ function findGifs() {
             newDiv.append(newDivContents);
 
             $('#gif-view').append(newDiv);
-
-            $('#gifReturn').css(
-                {
-                    "background-color": "#F8F9FA",
-                    "padding": "20px",
-                    "margin": "40px"
-                });
         }
 
-        $('.gif-image').on('click', function () {
-
-            if ($(this).attr("state") === "still") {
+        $('.gif-image').on({
+            mouseenter: function () {
                 $(this).attr("state", "animated");
                 $(this).attr("src", $(this).attr("animated-data"));
-            }
-            else {
+            },
+            mouseleave: function () {
                 $(this).attr("state", "still");
                 $(this).attr("src", $(this).attr("still-data"))
             }
-        })
+        });
     })
 }
 $(document).on("click", '.topic', findGifs);
