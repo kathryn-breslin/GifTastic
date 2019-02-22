@@ -14,6 +14,21 @@
     color: white;
 }
 
+.individual-gif-container {
+    float: left;
+    display: inline;
+    margin: 10px;
+    border: solid black 1px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+}
+
+.individual-gif-container p {
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    margin-top: 10px;
+}
 .display-4 {
     text-align: center;
 }
@@ -54,25 +69,4 @@ p {
 #add-topic {
     padding: 8px;
     margin: 5px;
-}
-
-/* #gifReturn {
-    background-color: #F8F9FA;
-    margin: 40px;
-    padding: 20px;
-} */
-
-.gifImage {
-    float: left;
-    display: inline;
-    margin: 10px;
-    border: solid black 1px;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
-.gifImage p {
-    font-family: 'Poppins', sans-serif;
-    text-align: left;
-    margin-top: 10px;
 }

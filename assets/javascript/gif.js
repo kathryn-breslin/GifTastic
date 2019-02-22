@@ -1,104 +1,94 @@
-var topics = ["plants", "books", "San Francisco", 
-                "running", "tacos", "husky", 
-                "flowers", "art", "Spain", "hiking"];
+var topics = ["plants", "books", "San Francisco",
+    "running", "tacos", "husky",
+    "flowers", "art", "Spain", "hiking"];
 
-function displayButtons () {
-   
-        var topic = $(this).attr('data-name');
-        
-        //my GIPHY key would not work..the one used below is from our activities
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+function displayButtons() {
+    for (var i = 0; i < topics.length; i++) {
+        // console.log(topics[i]);
+        var newButton = $('<button>');
+        newButton.addClass('btn btn-light');
+        newButton.addClass('topic');
+        newButton.attr('data-name', topics[i]);
+        newButton.text(topics[i]);
+        $('#buttons-view').append(newButton);
+    }
+    $('#add-topic').on('click', function () {
+        event.preventDefault();
+        addButtons();
+    })
+}
+
+function addButtons() {
+    var topic = $('#search-input').val().trim();
+    topics.push(topic);
+    // console.log(topic);
+    $("#buttons-view").empty();
+    $("#search-input").val("");
+    displayButtons();
+}
+
+function findGifs() {
+    var topic = $(this).attr('data-name');
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         topic + "&api_key=dc6zaTOxFJmzC&limit=10&rating=PG"
 
-        //MY GIPHY below
-        // var queryURL = "https://api.giphy.com/v1/gifs/search?" + topic + "api_key=HfzaLobXPlhuhwVrZxOCHvuJTyKDpo5m&q=topic&limit=10&offset=0&rating=PG&lang=en";
-        // console.log("https://api.giphy.com/v1/gifs/search?" + topic + "api_key=HfzaLobXPlhuhwVrZxOCHvuJTyKDpo5m&q=topic&limit=10&offset=0&rating=PG&lang=en");
-       
-       
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-           
-        }).then(function(response) {
-            console.log(response);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        // console.log(response);
 
-            $('.topic').on('click', function() {
+        topic = response.data;
+        // console.log(topic);
+        for (var i = 0; i < topic.length; i++) {
+            newDiv = $('<div>');
+            newDiv.addClass('individual-gif-container');
+            newDiv.addClass('card');
 
-                event.preventDefault();
-                
-                topic = response.data;
-                for (var i = 0; i < topic.length; i++) {
-                    var gifDiv = $('<div/>');
-                    var rating = $('<p>').text('Rating: ' + topic[i].rating);
-                    var title = $('<p>').text('Title: ' + topic[i].title);
-                    var gifImage = $('<img/>');
+            var newGifImage = $("<img src = '" + topic[i].images.fixed_height_still.url + " '>");
+            newGifImage.addClass('gif-image', 'card-image-top');
+            newGifImage.attr("state", "still");
+            newGifImage.attr("still-data", topic[i].images.fixed_height_still.url);
+            newGifImage.attr("animated-data", topic[i].images.fixed_height.url);
 
-                    gifImage.attr('data-state', 'still');
-                    gifImage.attr('src', topic[i].images.fixed_height_still.url);
-                    gifImage.attr('data-still', topic[i].images.fixed_height_still.url);
+            newDivContents = $('<div>');
+            newDivContents.addClass('card-body');
 
-                    gifImage.attr('data-state', 'animate');
-                    gifImage.attr('data-animate', topic[i].images.fixed_height.url);
-                   // gifImage.attr('src', topic[i].images.fixed_height.url);
-                    gifDiv.addClass('gifImage');
-                    gifDiv.append(gifImage);
-                    gifDiv.append(rating);
-                    gifDiv.append(title);
-            
-                    $('#gif-view').prepend(gifDiv);
+            newDivContentsPara = $('<p>')
+            newDivContentsPara.addClass('card-text');
+            newDivContentsPara.append("<p>Title: " + topic[i].title + "</p>");
+            newDivContentsPara.append("<p>Rating: " + topic[i].rating + "</p>");
 
-                    $('#gifReturn').css(
-                    {
-                        "background-color": "#F8F9FA",
-                        "padding": "20px",
-                        "margin": "40px"
-                    });
+            newDiv.append(newGifImage);
+            newDiv.append(newDivContentsPara);
+            newDiv.append(newDivContents);
 
+            $('#gif-view').append(newDiv);
 
-                    $('#gif-view').on('click', '.gifImage', function() {
-                        var state = $(this).attr('data-state');
-            
-                         if (state === 'still'){
-                         var animatedGif = $(this).attr('data-animate');
-                         $(this).attr('data-state', 'animate');
-                         $(this).attr('src', animatedGif);
-                          }
-            
-                         else   {
-                         var stillGif = $(this).attr('data-still');
-                         $(this).attr('data-state', 'still');
-                         $(this).attr('src', stillGif);
-                         }
-                     }); 
-                }
-         });
+            $('#gifReturn').css(
+                {
+                    "background-color": "#F8F9FA",
+                    "padding": "20px",
+                    "margin": "40px"
+                });
+        }
 
-    });
+        $('.gif-image').on('click', function () {
+
+            if ($(this).attr("state") === "still") {
+                $(this).attr("state", "animated");
+                $(this).attr("src", $(this).attr("animated-data"));
+            }
+            else {
+                $(this).attr("state", "still");
+                $(this).attr("src", $(this).attr("still-data"))
+            }
+        })
+    })
 }
-function createButtons() {
-    $('#buttons-view').empty();
+$(document).on('click', '.topic', findGifs);
+addButtons();
 
-    for (var i = 0; i < topics.length; i++) {
-        var button = $('<button>');
-        button.addClass('topic');
-        button.addClass('btn btn-light');
-        button.attr('data-name', topics[i]);
-        button.text(topics[i]);
-        $('#buttons-view').append(button);
-    }
-
-    $('#add-topic').on('click', function(event) {
-        event.preventDefault();
-    
-        var topic = $('#search-input').val().trim();
-        topics.push(topic);
-        createButtons();
-    });
-
-}
-
-$(document).on('click', '.topic', displayButtons);
-
-createButtons();
 
 
