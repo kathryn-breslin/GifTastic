@@ -29,7 +29,6 @@ function addButtons() {
 
 function findGifs() {
     var topic = $(this).attr('data-name');
-
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         topic + "&api_key=dc6zaTOxFJmzC&limit=10&rating=PG"
 
@@ -41,6 +40,8 @@ function findGifs() {
 
         topic = response.data;
         // console.log(topic);
+        $("#gif-view").empty()
+
         for (var i = 0; i < topic.length; i++) {
             newDiv = $('<div>');
             newDiv.addClass('individual-gif-container');
@@ -87,8 +88,6 @@ function findGifs() {
         })
     })
 }
-$(document).on('click', '.topic', findGifs);
+$(document).on("click", '.topic', findGifs);
+
 addButtons();
-
-
-
