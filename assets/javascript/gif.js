@@ -81,6 +81,7 @@ function createButtons() {
     for (var i = 0; i < topics.length; i++) {
         var button = $('<button>');
         button.addClass('topic');
+        button.addClass('btn btn-light');
         button.attr('data-name', topics[i]);
         button.text(topics[i]);
         $('#buttons-view').append(button);
